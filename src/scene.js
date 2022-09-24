@@ -1,48 +1,104 @@
 import {
+	AmbientLight,
 	AxesHelper,
-	BoxGeometry,
+	CylinderGeometry,
 	Mesh,
-	MeshBasicMaterial,
+	MeshPhongMaterial,
 	PerspectiveCamera,
+	PlaneGeometry,
 	Scene,
+	SpotLight,
 	WebGLRenderer,
 } from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import Stats from 'three/examples/jsm/libs/stats.module.js'
-let scene, camera, renderer, cube, axesHelper
-const stats = new Stats()
-stats.domElement.style.position = 'absolute'
-stats.domElement.style.top = '0px' //显示在屏幕左上角的地方。
-document.body.appendChild(stats.domElement) //添加到container之后
 
-export const init = () => {
-	scene = new Scene()
-	const geometry = new BoxGeometry(1, 1, 1)
-	const material = new MeshBasicMaterial({ color: 0x987 })
-	cube = new Mesh(geometry, material)
-	scene.add(cube)
-
-	axesHelper = new AxesHelper(3)
-	scene.add(axesHelper)
-	camera = new PerspectiveCamera(
-		75,
-		window.innerWidth / window.innerHeight,
-		0.1,
-		1000
-	)
-	camera.position.z = 5
-	camera.position.x = 2
-	camera.position.y = 1
+let scene, camera, renderer, plane, stats, cylinder, ambientLight, spotLight
+export function init() {
+	initRenderer()
+	initScene()
+	initCamera()
+	initMeshes()
+	initAmbientLight()
+	initSpotLight()
+	initAxesHelper()
+	initShadow()
+	onWindowResize()
+	const _controls = new OrbitControls(camera, renderer.domElement)
+	initStats()
+}
+function initRenderer() {
 	renderer = new WebGLRenderer()
 	renderer.setSize(window.innerWidth, window.innerHeight)
 	document.body.appendChild(renderer.domElement)
-	new OrbitControls(camera, renderer.domElement)
 }
+function initSpotLight() {
+	spotLight = new SpotLight(0xffffff, 1)
+	spotLight.position.set(-50, 80, 0)
+	spotLight.angle = Math.PI / 6
+	spotLight.penumbra = 0.2
+	// spotLight.castShadow = true
+	scene.add(spotLight)
+}
+function initAmbientLight() {
+	ambientLight = new AmbientLight(0xffffff, 0.5)
+	scene.add(ambientLight)
+}
+function initCamera() {
+	camera = new PerspectiveCamera(
+		40,
+		window.innerWidth / window.innerHeight,
+		1,
+		1000
+	)
+	camera.position.set(0, 120, 200)
+	camera.lookAt(0, 0, 0)
+}
+function initScene() {
+	scene = new Scene()
+}
+function initMeshes() {
+	const geometryPlane = new PlaneGeometry(2000, 800)
+	const materialPlane = new MeshPhongMaterial({ color: 0x808080 })
+	plane = new Mesh(geometryPlane, materialPlane)
+	plane.rotation.x = -Math.PI / 2
+	plane.position.set(0, -10, 0)
+	scene.add(plane)
 
+	const geometryCylinder = new CylinderGeometry(5, 5, 2, 32)
+	const materialCylinder = new MeshPhongMaterial({ color: 0x4080ff })
+	cylinder = new Mesh(geometryCylinder, materialCylinder)
+	cylinder.position.set(0, 10, 0)
+	Mesh.get
+	scene.add(cylinder)
+}
+function initAxesHelper() {
+	const axesHelper = new AxesHelper(50)
+	scene.add(axesHelper)
+}
+function initStats() {
+	stats = new Stats()
+	stats.domElement.style.position = 'absolute'
+	stats.domElement.style.top = '0px' //显示在屏幕左上角的地方。
+	document.body.appendChild(stats.domElement) //添加到container之后
+}
+function initShadow() {
+	cylinder.castShadow = true
+	plane.receiveShadow = true
+	spotLight.castShadow = true
+	renderer.shadowMap.enabled = true
+}
+function onWindowResize() {
+	window.addEventListener('resize', () => {
+		camera.aspect = window.innerWidth / window.innerHeight
+		camera.updateProjectionMatrix()
+		renderer.setSize(window.innerWidth, window.innerHeight)
+	})
+}
 export function render() {
-	stats.update()
 	renderer.render(scene, camera)
-	cube.rotation.x += 0.01
-	cube.rotation.y += 0.01
+	cylinder.rotation.y += 0.01
+	cylinder.rotation.x += 0.01
+	stats.update()
 	requestAnimationFrame(render)
 }

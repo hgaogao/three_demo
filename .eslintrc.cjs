@@ -17,5 +17,12 @@ module.exports = {
 	plugins: ['vue', 'prettier'],
 	rules: {
 		indent: ['error', 'tab'],
+		'no-unused-vars': [
+			'error',
+			{
+				argsIgnorePattern: '^_',
+				varsIgnorePattern: '^_',
+			},
+		],
 	},
 }
