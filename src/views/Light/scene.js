@@ -1,6 +1,5 @@
 import {
 	AmbientLight,
-	AxesHelper,
 	CylinderGeometry,
 	Mesh,
 	MeshPhongMaterial,
@@ -11,26 +10,29 @@ import {
 	WebGLRenderer,
 } from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import Stats from 'three/examples/jsm/libs/stats.module.js'
+import { initStats, initAxesHelper } from '../../utils/initHelper'
 
-let scene, camera, renderer, plane, stats, cylinder, ambientLight, spotLight
-export function init() {
+let scene, camera, renderer, plane, cylinder, ambientLight, spotLight
+let domElement
+let stats
+export function init(domEl) {
+	domElement = domEl
 	initRenderer()
 	initScene()
 	initCamera()
 	initMeshes()
 	initAmbientLight()
 	initSpotLight()
-	initAxesHelper()
+	initAxesHelper(scene)
 	initShadow()
 	onWindowResize()
 	const _controls = new OrbitControls(camera, renderer.domElement)
-	initStats()
+	stats = initStats(domEl)
 }
 function initRenderer() {
 	renderer = new WebGLRenderer()
 	renderer.setSize(window.innerWidth, window.innerHeight)
-	document.body.appendChild(renderer.domElement)
+	domElement.appendChild(renderer.domElement)
 }
 function initSpotLight() {
 	spotLight = new SpotLight(0xffffff, 1)
@@ -72,16 +74,7 @@ function initMeshes() {
 	Mesh.get
 	scene.add(cylinder)
 }
-function initAxesHelper() {
-	const axesHelper = new AxesHelper(50)
-	scene.add(axesHelper)
-}
-function initStats() {
-	stats = new Stats()
-	stats.domElement.style.position = 'absolute'
-	stats.domElement.style.top = '0px' //显示在屏幕左上角的地方。
-	document.body.appendChild(stats.domElement) //添加到container之后
-}
+
 function initShadow() {
 	cylinder.castShadow = true
 	plane.receiveShadow = true
