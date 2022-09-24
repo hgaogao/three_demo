@@ -12,7 +12,7 @@ const routes = [
 	{
 		path: '/Swiper',
 		name: 'Swiper',
-		component: () => import('@/views/swiper/index.vue'),
+		component: () => import('@/views/Swiper/index.vue'),
 		meta: {
 			title: 'Swiper',
 		},

@@ -6,7 +6,7 @@ export default {
 <script setup>
 import { onMounted, ref } from 'vue'
 import { init, render } from './scene.js'
-import Swiper from '@/components/Swiper.vue'
+import Swiper from '@/components/swiper.vue'
 const domEl = ref(null)
 onMounted(() => {
 	init(domEl.value)
