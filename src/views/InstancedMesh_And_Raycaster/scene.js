@@ -5,31 +5,29 @@ import {
 	InstancedMesh,
 	Matrix4,
 	MeshPhongMaterial,
-	PerspectiveCamera,
-	Raycaster,
 	Scene,
 	Vector2,
-	WebGLRenderer,
 } from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+
+import { initCamera } from '../../utils/initCamera'
 import { initStats, initAxesHelper } from '../../utils/initHelper'
+import { initRaycaster } from '../../utils/initRaycaster'
+import { initRenderer } from '../../utils/initRenderer'
 
 let scene, camera, renderer, light, meshes
-let stats
-let domElement
-let raycaster = new Raycaster()
+let stats, raycaster
+
 let mouse = new Vector2(1, 1)
 let count = 1000
 export function init(domEl) {
-	domElement = domEl
-	initRenderer()
-	initScene()
-	initCamera()
+	renderer = initRenderer(domEl)
+	scene = new Scene()
+
+	camera = initCamera(renderer)
 	initLight()
 	initMeshes()
 	initAxesHelper(scene)
-	onWindowResize()
-	const _controls = new OrbitControls(camera, renderer.domElement)
+	raycaster = initRaycaster(camera)
 	stats = initStats(domEl)
 	document.addEventListener('mousemove', onDocumentMouseMove, false)
 }
@@ -58,36 +56,10 @@ function initMeshes() {
 	}
 	scene.add(meshes)
 }
-function initRenderer() {
-	renderer = new WebGLRenderer()
-	renderer.setSize(window.innerWidth, window.innerHeight)
-	domElement.appendChild(renderer.domElement)
-}
-function initCamera() {
-	camera = new PerspectiveCamera(
-		60,
-		window.innerWidth / window.innerHeight,
-		1,
-		1000
-	)
-	camera.position.set(10, 10, 10)
-	camera.lookAt(0, 0, 0)
-}
 function initLight() {
 	light = new HemisphereLight(0xffffff, 0x888888)
 	light.position.set(0, 1, 0)
 	scene.add(light)
-}
-function initScene() {
-	scene = new Scene()
-}
-
-function onWindowResize() {
-	window.addEventListener('resize', () => {
-		camera.aspect = window.innerWidth / window.innerHeight
-		camera.updateProjectionMatrix()
-		renderer.setSize(window.innerWidth, window.innerHeight)
-	})
 }
 export function render() {
 	renderer.render(scene, camera)
@@ -96,7 +68,6 @@ export function render() {
 	requestAnimationFrame(render)
 }
 function changColor() {
-	raycaster.setFromCamera(mouse, camera) //从相机发射一条射线,射线的方向是从相机指向鼠标的方向
 	const intersection = raycaster.intersectObject(meshes) //射线和物体相交
 	if (intersection.length > 0) {
 		const instanceId = intersection[0].instanceId

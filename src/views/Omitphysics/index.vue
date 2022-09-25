@@ -5,13 +5,15 @@ export default {
 </script>
 <script setup>
 import { onMounted, ref } from 'vue'
-import { init, render } from './scene.js'
+import { createScene } from './scene.js'
+import Loading from '../../components/Loading.vue'
 const domEl = ref(null)
-onMounted(() => {
-	init(domEl.value)
-	render()
+const isReady = ref(false)
+onMounted(async () => {
+	isReady.value = await createScene(domEl.value)
 })
 </script>
 <template>
+	<Loading v-if="!isReady" />
 	<div ref="domEl"></div>
 </template>
