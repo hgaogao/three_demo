@@ -10,6 +10,14 @@ const routes = [
 		},
 	},
 	{
+		path: '/select',
+		name: 'select',
+		component: () => import('@/views/Select.vue'),
+		meta: {
+			title: 'select',
+		},
+	},
+	{
 		path: '/Swiper',
 		name: 'Swiper',
 		component: () => import('@/views/Swiper/index.vue'),
