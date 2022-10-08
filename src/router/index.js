@@ -49,6 +49,14 @@ const routes = [
 			title: 'Omitphysics物理效果',
 		},
 	},
+	{
+		path: '/shadowmap_view',
+		name: 'shadowmap_view',
+		component: () => import('@/views/shadowmap_view/index.vue'),
+		meta: {
+			title: 'shadowmap_view',
+		},
+	},
 ]
 const router = createRouter({
 	history: createWebHistory(),
