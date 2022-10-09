@@ -57,6 +57,14 @@ const routes = [
 			title: 'shadowmap_view',
 		},
 	},
+	{
+		path: '/animation',
+		name: 'animation',
+		component: () => import('@/views/animation/index.vue'),
+		meta: {
+			title: 'animation',
+		},
+	},
 ]
 const router = createRouter({
 	history: createWebHistory(),
