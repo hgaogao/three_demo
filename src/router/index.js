@@ -65,6 +65,14 @@ const routes = [
 			title: 'animation',
 		},
 	},
+	{
+		path: '/loadGLTF',
+		name: 'loadGLTF',
+		component: () => import('@/views/loadGLTF/index.vue'),
+		meta: {
+			title: 'loadGLTF',
+		},
+	},
 ]
 const router = createRouter({
 	history: createWebHistory(),
