@@ -1,4 +1,4 @@
-import { WebGLRenderer } from 'three'
+import { sRGBEncoding, WebGLRenderer } from 'three'
 
 /**
  *
@@ -8,6 +8,7 @@ import { WebGLRenderer } from 'three'
 export function initRenderer(domElement) {
 	const renderer = new WebGLRenderer()
 	renderer.setSize(window.innerWidth, window.innerHeight)
+	renderer.outputEncoding = sRGBEncoding
 	domElement.appendChild(renderer.domElement)
 
 	renderer.shadowMap.enabled = true

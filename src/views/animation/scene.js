@@ -1,5 +1,5 @@
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import { initStats, initAxesHelper } from '../../utils/initHelper'
+import { initCamera } from '@/utils/initCamera'
+import { initLight } from '@/utils/initLight'
 import { initRenderer } from '@/utils/initRenderer'
 import {
 	AnimationClip,
@@ -15,8 +15,9 @@ import {
 	Vector3,
 	VectorKeyframeTrack,
 } from 'three'
-import { initCamera } from '@/utils/initCamera'
-import { initLight } from '@/utils/initLight'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { initAxesHelper, initStats } from '../../utils/initHelper'
+
 let scene, camera, renderer
 let stats
 let cube
