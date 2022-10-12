@@ -8,7 +8,7 @@ let stats
 export function init(domEl) {
 	renderer = initRenderer(domEl)
 	scene = new Scene()
-	camera = initCamera(renderer)
+	camera = initCamera(renderer, { x: 5, y: 2, z: 8 })
 	initAxesHelper(scene)
 	const _controls = new OrbitControls(camera, renderer.domElement)
 	stats = initStats(domEl)

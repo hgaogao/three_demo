@@ -73,6 +73,14 @@ const routes = [
 			title: 'loadGLTF',
 		},
 	},
+	{
+		path: '/gltf+draco+roomenvironment',
+		name: 'gltf+draco+roomenvironment',
+		component: () => import('@/views/gltf+draco+roomenvironment/index.vue'),
+		meta: {
+			title: 'gltf+draco+roomenvironment',
+		},
+	},
 ]
 const router = createRouter({
 	history: createWebHistory(),
