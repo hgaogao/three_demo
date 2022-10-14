@@ -81,6 +81,14 @@ const routes = [
 			title: 'gltf+draco+roomenvironment',
 		},
 	},
+	{
+		path: '/clipping',
+		name: 'clipping',
+		component: () => import('@/views/clipping/index.vue'),
+		meta: {
+			title: 'clipping',
+		},
+	},
 ]
 const router = createRouter({
 	history: createWebHistory(),
