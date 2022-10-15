@@ -89,6 +89,14 @@ const routes = [
 			title: 'clipping',
 		},
 	},
+	{
+		path: '/skybox',
+		name: 'skybox',
+		component: () => import('@/views/skybox/index.vue'),
+		meta: {
+			title: 'skybox',
+		},
+	},
 ]
 const router = createRouter({
 	history: createWebHistory(),
