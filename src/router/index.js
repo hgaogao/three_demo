@@ -97,6 +97,22 @@ const routes = [
 			title: 'skybox',
 		},
 	},
+	{
+		path: '/font',
+		name: 'font',
+		component: () => import('@/views/font/index.vue'),
+		meta: {
+			title: 'font',
+		},
+	},
+	{
+		path: '/texture',
+		name: 'texture',
+		component: () => import('@/views/texture/index.vue'),
+		meta: {
+			title: 'texture',
+		},
+	},
 ]
 const router = createRouter({
 	history: createWebHistory(),
