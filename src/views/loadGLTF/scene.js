@@ -1,4 +1,4 @@
-import Soldier from '@/static/models/Soldier.glb?url'
+import Soldier from '@/assets/models/Soldier.glb?url'
 
 import { initCamera } from '@/utils/initCamera'
 import { initLight } from '@/utils/initLight'

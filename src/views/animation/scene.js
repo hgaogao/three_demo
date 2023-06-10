@@ -19,7 +19,6 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { initAxesHelper, initStats } from '../../utils/initHelper'
 
 let scene, camera, renderer
-let stats
 let cube
 let clip, mixer
 const clock = new Clock()
@@ -31,7 +30,7 @@ export function init(domEl) {
 	initLight(scene)
 	initAxesHelper(scene)
 	const _controls = new OrbitControls(camera, renderer.domElement)
-	stats = initStats(domEl)
+	initStats(domEl)
 
 	initMeshes()
 	makeClip()
@@ -116,7 +115,6 @@ function initMeshes() {
 export function render() {
 	renderer.render(scene, camera)
 	const delta = clock.getDelta()
-	stats.update()
 	if (mixer) {
 		mixer.update(delta)
 	}

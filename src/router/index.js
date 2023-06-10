@@ -73,6 +73,54 @@ const routes = [
 			title: 'loadGLTF',
 		},
 	},
+	{
+		path: '/gltf+draco+roomenvironment',
+		name: 'gltf+draco+roomenvironment',
+		component: () => import('@/views/gltf+draco+roomenvironment/index.vue'),
+		meta: {
+			title: 'gltf+draco+roomenvironment',
+		},
+	},
+	{
+		path: '/clipping',
+		name: 'clipping',
+		component: () => import('@/views/clipping/index.vue'),
+		meta: {
+			title: 'clipping',
+		},
+	},
+	{
+		path: '/skybox',
+		name: 'skybox',
+		component: () => import('@/views/skybox/index.vue'),
+		meta: {
+			title: 'skybox',
+		},
+	},
+	{
+		path: '/font',
+		name: 'font',
+		component: () => import('@/views/font/index.vue'),
+		meta: {
+			title: 'font',
+		},
+	},
+	{
+		path: '/texture',
+		name: 'texture',
+		component: () => import('@/views/texture/index.vue'),
+		meta: {
+			title: 'texture',
+		},
+	},
+	{
+		path: '/project',
+		name: 'project',
+		component: () => import('@/views/project/index.vue'),
+		meta: {
+			title: 'OOP',
+		},
+	},
 ]
 const router = createRouter({
 	history: createWebHistory(),
