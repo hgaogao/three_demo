@@ -42,14 +42,6 @@ const routes = [
 		},
 	},
 	{
-		path: '/Omitphysics',
-		name: 'Omitphysics',
-		component: () => import('@/views/Omitphysics/index.vue'),
-		meta: {
-			title: 'Omitphysics物理效果',
-		},
-	},
-	{
 		path: '/shadowmap_view',
 		name: 'shadowmap_view',
 		component: () => import('@/views/shadowmap_view/index.vue'),
