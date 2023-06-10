@@ -113,6 +113,14 @@ const routes = [
 			title: 'texture',
 		},
 	},
+	{
+		path: '/project',
+		name: 'project',
+		component: () => import('@/views/project/index.vue'),
+		meta: {
+			title: 'OOP',
+		},
+	},
 ]
 const router = createRouter({
 	history: createWebHistory(),
