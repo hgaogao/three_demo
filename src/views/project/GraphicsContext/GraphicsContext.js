@@ -9,18 +9,18 @@ import PerformancePanel from './utils/PerformancePanel'
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment'
 
 export default class GraphicsContext {
+	scene = new THREE.Scene()
+	sizes = new Sizes()
+	camera = new Camera(this.sizes)
+	time = new Time()
 	constructor(canvas, isDebug = false) {
 		this.isDebug = isDebug
 		this.canvas = canvas
-		this.scene = new THREE.Scene()
-		this.sizes = new Sizes()
-		this.camera = new Camera(this.sizes)
 		this.renderer = new Renderer(this.canvas, this.sizes)
 		this.controls = new Controls(this.camera.perspectiveCamera, this.canvas)
-		this.time = new Time()
 		this.world = new World(this.scene, this.time)
 		this.initDevHelper(isDebug)
-		this.handlelistener()
+		this.handleListener()
 		this.setENV()
 	}
 
@@ -31,7 +31,7 @@ export default class GraphicsContext {
 			new RoomEnvironment()
 		).texture // 重点,设置场景的环境贴图,这里使用了RoomEnvironment 设置了environment就可以不用打环境光了
 	}
-	handlelistener() {
+	handleListener() {
 		this.sizes.on('resize', () => {
 			this.resize()
 		})
